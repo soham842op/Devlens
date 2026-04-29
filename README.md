@@ -112,6 +112,22 @@ Report saved: C:\Users\soham\Desktop\Devlens\report.html
 
 ---
 
+## Analyzing Any GitHub Repo
+
+DevLens works on local files only — it can't scan a GitHub URL directly. But you can clone any repo first and then point DevLens at it:
+
+```bash
+# Clone the repo you want to analyze
+git clone https://github.com/someone/some-repo
+
+# Then run DevLens on it
+npm run dev "C:\path\to\some-repo"
+```
+
+Delete the folder when you're done — the report is saved separately.
+
+---
+
 ## Bonus: MCP Mode (Claude Code Users Only)
 
 If you use [Claude Code](https://claude.ai/code), you can run DevLens interactively inside a Claude session instead of generating an HTML file.
