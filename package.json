@@ -14,7 +14,8 @@
   "type": "commonjs",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.91.1",
-    "better-sqlite3": "^12.9.0"
+    "better-sqlite3": "^12.9.0",
+    "ollama": "^0.6.3"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",
