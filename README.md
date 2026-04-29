@@ -112,6 +112,36 @@ Report saved: C:\Users\soham\Desktop\Devlens\report.html
 
 ---
 
+## Bonus: MCP Mode (Claude Code Users Only)
+
+If you use [Claude Code](https://claude.ai/code), you can run DevLens interactively inside a Claude session instead of generating an HTML file.
+
+**Setup (one time):**
+
+```bash
+# Install MCP servers
+npm install -g @modelcontextprotocol/server-filesystem
+pip install mcp-server-git
+
+# Add them to Claude Code
+claude mcp add filesystem npx @modelcontextprotocol/server-filesystem /path/to/your/projects
+claude mcp add git mcp-server-git
+```
+
+**Run:**
+
+```bash
+# Open Claude Code inside the Devlens folder
+cd Devlens
+claude
+```
+
+Then just tell Claude: _"Analyze my repos at /path/to/your/projects"_
+
+Claude will use the `CLAUDE.md` instructions in this repo to guide the analysis — reading your files and git history directly through MCP tools, then giving you an interactive report you can ask follow-up questions about.
+
+---
+
 ## Privacy
 
 - Your code never leaves your computer
