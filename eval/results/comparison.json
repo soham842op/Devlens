@@ -1,0 +1,372 @@
+{
+  "before": {
+    "file": "eval/results/before_cb80731.json",
+    "devlens_commit": null
+  },
+  "after": {
+    "file": "eval/results/after.json",
+    "devlens_commit": "cb8073135449be7fb7c09ef091558133358deaa3"
+  },
+  "method": {
+    "ci": "percentile bootstrap, 10000 resamples, seed 42",
+    "test": "exact McNemar (two-sided)"
+  },
+  "sets": {
+    "dev": {
+      "tests": {
+        "precision": {
+          "n": 1933,
+          "before": 0.8146666666666667,
+          "before_ci95": [
+            0.7862796833773087,
+            0.8415446071904128
+          ],
+          "after": 1,
+          "after_ci95": [
+            1,
+            1
+          ],
+          "delta": 0.18533333333333335,
+          "delta_ci95": [
+            0.1584699453551912,
+            0.21389645776566757
+          ],
+          "mcnemar": {
+            "only_before_correct": 0,
+            "only_after_correct": 139,
+            "p_value": 2.8698592549372158e-42
+          }
+        },
+        "recall": {
+          "n": 1933,
+          "before": 1,
+          "before_ci95": [
+            1,
+            1
+          ],
+          "after": 1,
+          "after_ci95": [
+            1,
+            1
+          ],
+          "delta": 0,
+          "delta_ci95": [
+            0,
+            0
+          ],
+          "mcnemar": {
+            "only_before_correct": 0,
+            "only_after_correct": 139,
+            "p_value": 2.8698592549372158e-42
+          }
+        },
+        "f1": {
+          "n": 1933,
+          "before": 0.8978692138133725,
+          "before_ci95": [
+            0.880354505169867,
+            0.9139551699204628
+          ],
+          "after": 1,
+          "after_ci95": [
+            1,
+            1
+          ],
+          "delta": 0.10213078618662752,
+          "delta_ci95": [
+            0.08605341246290799,
+            0.1197559115179252
+          ],
+          "mcnemar": {
+            "only_before_correct": 0,
+            "only_after_correct": 139,
+            "p_value": 2.8698592549372158e-42
+          }
+        }
+      },
+      "error_handling": {
+        "precision": {
+          "n": 1933,
+          "before": 0.4782608695652174,
+          "before_ci95": [
+            0.4359430604982206,
+            0.5212355212355212
+          ],
+          "after": 0.9806201550387597,
+          "after_ci95": [
+            0.9616858237547893,
+            0.9960629921259843
+          ],
+          "delta": 0.5023592854735422,
+          "delta_ci95": [
+            0.4587180348049914,
+            0.5453972575115951
+          ],
+          "mcnemar": {
+            "only_before_correct": 0,
+            "only_after_correct": 271,
+            "p_value": 5.271098971615296e-82
+          }
+        },
+        "recall": {
+          "n": 1933,
+          "before": 1,
+          "before_ci95": [
+            1,
+            1
+          ],
+          "after": 1,
+          "after_ci95": [
+            1,
+            1
+          ],
+          "delta": 0,
+          "delta_ci95": [
+            0,
+            0
+          ],
+          "mcnemar": {
+            "only_before_correct": 0,
+            "only_after_correct": 271,
+            "p_value": 5.271098971615296e-82
+          }
+        },
+        "f1": {
+          "n": 1933,
+          "before": 0.6470588235294118,
+          "before_ci95": [
+            0.6071871127633209,
+            0.6852791878172588
+          ],
+          "after": 0.9902152641878669,
+          "after_ci95": [
+            0.98046875,
+            0.9980276134122288
+          ],
+          "delta": 0.3431564406584551,
+          "delta_ci95": [
+            0.3052422149196342,
+            0.382454790303963
+          ],
+          "mcnemar": {
+            "only_before_correct": 0,
+            "only_after_correct": 271,
+            "p_value": 5.271098971615296e-82
+          }
+        }
+      },
+      "commits_description_only": {
+        "accuracy": {
+          "n": 8299,
+          "before": 0.2929268586576696,
+          "before_ci95": [
+            0.28328714302928065,
+            0.30280756717676827
+          ],
+          "after": 0.43872755753705267,
+          "after_ci95": [
+            0.42824436679117966,
+            0.4494517411736354
+          ],
+          "delta": 0.14580069887938307,
+          "delta_ci95": [
+            0.134474033016026,
+            0.15724786118809497
+          ],
+          "mcnemar": {
+            "only_before_correct": 648,
+            "only_after_correct": 1858,
+            "p_value": 2.659430287484747e-134
+          }
+        },
+        "majority_baseline": {
+          "label": "bugfix",
+          "accuracy": 0.45680202434028194
+        }
+      },
+      "commits_parsed": {
+        "before": 4850,
+        "after": 14696,
+        "in_history": 14696
+      }
+    },
+    "heldout": {
+      "tests": {
+        "precision": {
+          "n": 765,
+          "before": 0.7870967741935484,
+          "before_ci95": [
+            0.7494908350305499,
+            0.8237885462555066
+          ],
+          "after": 0.9682539682539683,
+          "after_ci95": [
+            0.949468085106383,
+            0.9844559585492227
+          ],
+          "delta": 0.18115719406041986,
+          "delta_ci95": [
+            0.14742716241645581,
+            0.216396826555186
+          ],
+          "mcnemar": {
+            "only_before_correct": 0,
+            "only_after_correct": 87,
+            "p_value": 1.2924697071141075e-26
+          }
+        },
+        "recall": {
+          "n": 765,
+          "before": 1,
+          "before_ci95": [
+            1,
+            1
+          ],
+          "after": 1,
+          "after_ci95": [
+            1,
+            1
+          ],
+          "delta": 0,
+          "delta_ci95": [
+            0,
+            0
+          ],
+          "mcnemar": {
+            "only_before_correct": 0,
+            "only_after_correct": 87,
+            "p_value": 1.2924697071141075e-26
+          }
+        },
+        "f1": {
+          "n": 765,
+          "before": 0.8808664259927798,
+          "before_ci95": [
+            0.8568102444703143,
+            0.9033816425120773
+          ],
+          "after": 0.9838709677419355,
+          "after_ci95": [
+            0.9740791268758526,
+            0.9921671018276762
+          ],
+          "delta": 0.10300454174915574,
+          "delta_ci95": [
+            0.08238157648380451,
+            0.12520641641014651
+          ],
+          "mcnemar": {
+            "only_before_correct": 0,
+            "only_after_correct": 87,
+            "p_value": 1.2924697071141075e-26
+          }
+        }
+      },
+      "error_handling": {
+        "precision": {
+          "n": 765,
+          "before": 0.31268436578171094,
+          "before_ci95": [
+            0.26330532212885155,
+            0.3628048780487805
+          ],
+          "after": 0.954954954954955,
+          "after_ci95": [
+            0.911504424778761,
+            0.9905660377358491
+          ],
+          "delta": 0.6422705891732441,
+          "delta_ci95": [
+            0.5881570192947438,
+            0.6972477064220184
+          ],
+          "mcnemar": {
+            "only_before_correct": 0,
+            "only_after_correct": 228,
+            "p_value": 4.636507688359283e-69
+          }
+        },
+        "recall": {
+          "n": 765,
+          "before": 1,
+          "before_ci95": [
+            1,
+            1
+          ],
+          "after": 1,
+          "after_ci95": [
+            1,
+            1
+          ],
+          "delta": 0,
+          "delta_ci95": [
+            0,
+            0
+          ],
+          "mcnemar": {
+            "only_before_correct": 0,
+            "only_after_correct": 228,
+            "p_value": 4.636507688359283e-69
+          }
+        },
+        "f1": {
+          "n": 765,
+          "before": 0.4764044943820225,
+          "before_ci95": [
+            0.41685144124168516,
+            0.5324384787472036
+          ],
+          "after": 0.9769585253456221,
+          "after_ci95": [
+            0.9537037037037037,
+            0.995260663507109
+          ],
+          "delta": 0.5005540309635996,
+          "delta_ci95": [
+            0.4466291220417331,
+            0.5574280528908478
+          ],
+          "mcnemar": {
+            "only_before_correct": 0,
+            "only_after_correct": 228,
+            "p_value": 4.636507688359283e-69
+          }
+        }
+      },
+      "commits_description_only": {
+        "accuracy": {
+          "n": 5508,
+          "before": 0.36673928830791575,
+          "before_ci95": [
+            0.3540305010893246,
+            0.3794480755265069
+          ],
+          "after": 0.5212418300653595,
+          "after_ci95": [
+            0.5081699346405228,
+            0.5343137254901961
+          ],
+          "delta": 0.15450254175744377,
+          "delta_ci95": [
+            0.13943355119825707,
+            0.1692084241103849
+          ],
+          "mcnemar": {
+            "only_before_correct": 496,
+            "only_after_correct": 1347,
+            "p_value": 1.475342822709567e-90
+          }
+        },
+        "majority_baseline": {
+          "label": "bugfix",
+          "accuracy": 0.5230573710965868
+        }
+      },
+      "commits_parsed": {
+        "before": 4085,
+        "after": 11322,
+        "in_history": 11322
+      }
+    }
+  }
+}

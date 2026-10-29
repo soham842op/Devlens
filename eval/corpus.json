@@ -1,0 +1,12 @@
+{
+  "dev": [
+    { "name": "axios", "url": "https://github.com/axios/axios.git", "commit": "9d11464a75ee5c644c0308d742f58755c0482594" },
+    { "name": "commitizen", "url": "https://github.com/commitizen-tools/commitizen.git", "commit": "33c248e4d21fa67d312991d96b038ab71be3039b" },
+    { "name": "vite", "url": "https://github.com/vitejs/vite.git", "commit": "cce559ab158cc6b177d0911a0bea73436b48faff" }
+  ],
+  "heldout": [
+    { "name": "core", "url": "https://github.com/vuejs/core.git", "commit": "24c9d0bffb2299635b8112a978d74a38723aaa10" },
+    { "name": "semantic-release", "url": "https://github.com/semantic-release/semantic-release.git", "commit": "04c1923646eb801cf6f0f90455cf00b78b94fdb7" },
+    { "name": "python-semantic-release", "url": "https://github.com/python-semantic-release/python-semantic-release.git", "commit": "60de8fcacea7fd5177f34368490677be5f098995" }
+  ]
+}

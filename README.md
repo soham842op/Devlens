@@ -158,6 +158,21 @@ Claude will use the `CLAUDE.md` instructions in this repo to guide the analysis 
 
 ---
 
+## Tests and Accuracy
+
+```bash
+npm test            # Vitest unit + regression tests
+npm run typecheck
+```
+
+DevLens's heuristics are measured against ground truth (Python `ast` and the TypeScript compiler for error handling,
+test-file conventions, Conventional Commits labels) on 6 pinned open-source repos, 3 of them held out while tuning.
+On the held-out repos, error-handling precision went from 31.3% to 95.5% and test-file precision from 78.7% to 96.8%,
+and large repos now report their full git history instead of 0 commits. Method, numbers and how to rerun:
+[`eval/README.md`](eval/README.md).
+
+---
+
 ## Privacy
 
 - Your code never leaves your computer
@@ -173,6 +188,7 @@ Claude will use the `CLAUDE.md` instructions in this repo to guide the analysis 
 - SQLite (local database)
 - Ollama + llama3 (local AI)
 - HTML report output
+- Vitest + GitHub Actions (tests), Python `ast` / TypeScript compiler API (evaluation)
 
 ---
 

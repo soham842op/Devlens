@@ -45,7 +45,20 @@ export function findRepos(rootDir: string): string[] {
   return repos;
 }
 
-export function extractMetrics(filePath: string, content: string, language: string) {
+const TEST_DIRS = new Set(['test', 'tests', '__tests__', 'spec', 'specs', 'testing']);
+const TEST_FILE = /^test_.*\.py$|_test\.py$|^tests?\.py$|^conftest\.py$|_test\.go$|\.(test|spec)\.[cm]?[jt]sx?$|tests?\.java$|tests?\.cs$|_(test|spec)\.rb$/;
+// A test call needs a string argument, so split( / exit( / init( don't count
+const TEST_CONTENT = /\b(describe|it|test)\s*\(\s*['"`]|\bdef test_|#\[test\]|@Test\b/;
+const ERROR_HANDLING = /\btry\s*[{:(]|\bcatch\s*[({]|\.catch\s*\(|\bexcept\b[^\n]*:|\berr\s*!=\s*nil|\bResult<|\.unwrap_or|\brescue\b/;
+
+// relPath is relative to the repo root, so folders above the repo (e.g. "latest-projects") can't make every file a test
+export function isTestPath(relPath: string): boolean {
+  const parts = relPath.toLowerCase().split(/[\\/]/);
+  const base = parts[parts.length - 1];
+  return parts.slice(0, -1).some(p => TEST_DIRS.has(p)) || TEST_FILE.test(base);
+}
+
+export function extractMetrics(relPath: string, content: string, language: string) {
   const lines = content.split('\n');
   const nonEmptyLines = lines.filter(l => l.trim().length > 0);
 
@@ -76,9 +89,8 @@ export function extractMetrics(filePath: string, content: string, language: stri
     return t.startsWith('//') || t.startsWith('#') || t.startsWith('*') || t.startsWith('/*');
   });
 
-  const hasErrorHandling = /try|catch|except|error|err\s*!=\s*nil|Result<|unwrap_or/.test(content);
-  const hasTests = filePath.includes('test') || filePath.includes('spec') ||
-    /describe\(|it\(|def test_|#\[test\]|@Test/.test(content);
+  const hasErrorHandling = ERROR_HANDLING.test(content);
+  const hasTests = isTestPath(relPath) || TEST_CONTENT.test(content);
   const hasTypeHints = language === 'TypeScript' ||
     /:\s*(str|int|float|bool|List|Dict|Optional|Any)\b/.test(content) ||
     /->/.test(content);
@@ -161,7 +173,7 @@ export function scanRepo(repoPath: string, repoName: string, db: Database.Databa
         }
 
         const stats = fs.statSync(fullPath);
-        const metrics = extractMetrics(fullPath, content, language);
+        const metrics = extractMetrics(path.relative(repoPath, fullPath), content, language);
 
         insert.run({
           repo_name: repoName,

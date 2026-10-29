@@ -52,7 +52,7 @@ async function main() {
   console.log(`Scanned: ${totalFiles} files | ${totalCommits} commits | ${repos.length} repos`);
 
   // Phase 2: Analyze
-  console.log(`\nCalling Claude for analysis...`);
+  console.log(`\nGenerating analysis with local LLM (Ollama llama3)...`);
   let analysisText: string;
   try {
     analysisText = await analyze(dbPath);

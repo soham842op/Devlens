@@ -5,3 +5,7 @@ dist/
 *.db-wal
 report.html
 .env
+
+# evaluation working files and cloned corpus
+eval/out/
+eval/corpus/

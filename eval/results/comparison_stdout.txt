@@ -1,0 +1,22 @@
+
+[dev]  commits parsed 4850 -> 14696 of 14696
+  tests precision              81.5% [78.6, 84.2] -> 100.0% [100.0, 100.0]  delta 18.5 pts [15.8, 21.4]  McNemar p=2.87e-42 (n=1933)
+  tests recall                 100.0% [100.0, 100.0] -> 100.0% [100.0, 100.0]  delta 0.0 pts [0.0, 0.0]  McNemar p=2.87e-42 (n=1933)
+  tests f1                     89.8% [88.0, 91.4] -> 100.0% [100.0, 100.0]  delta 10.2 pts [8.6, 12.0]  McNemar p=2.87e-42 (n=1933)
+  error handling precision     47.8% [43.6, 52.1] -> 98.1% [96.2, 99.6]  delta 50.2 pts [45.9, 54.5]  McNemar p=5.27e-82 (n=1933)
+  error handling recall        100.0% [100.0, 100.0] -> 100.0% [100.0, 100.0]  delta 0.0 pts [0.0, 0.0]  McNemar p=5.27e-82 (n=1933)
+  error handling f1            64.7% [60.7, 68.5] -> 99.0% [98.0, 99.8]  delta 34.3 pts [30.5, 38.2]  McNemar p=5.27e-82 (n=1933)
+  commit type (no prefix) acc  29.3% [28.3, 30.3] -> 43.9% [42.8, 44.9]  delta 14.6 pts [13.4, 15.7]  McNemar p=2.66e-134 (n=8299)
+  majority baseline: bugfix 45.7%
+
+[heldout]  commits parsed 4085 -> 11322 of 11322
+  tests precision              78.7% [74.9, 82.4] -> 96.8% [94.9, 98.4]  delta 18.1 pts [14.7, 21.6]  McNemar p=1.29e-26 (n=765)
+  tests recall                 100.0% [100.0, 100.0] -> 100.0% [100.0, 100.0]  delta 0.0 pts [0.0, 0.0]  McNemar p=1.29e-26 (n=765)
+  tests f1                     88.1% [85.7, 90.3] -> 98.4% [97.4, 99.2]  delta 10.3 pts [8.2, 12.5]  McNemar p=1.29e-26 (n=765)
+  error handling precision     31.3% [26.3, 36.3] -> 95.5% [91.2, 99.1]  delta 64.2 pts [58.8, 69.7]  McNemar p=4.64e-69 (n=765)
+  error handling recall        100.0% [100.0, 100.0] -> 100.0% [100.0, 100.0]  delta 0.0 pts [0.0, 0.0]  McNemar p=4.64e-69 (n=765)
+  error handling f1            47.6% [41.7, 53.2] -> 97.7% [95.4, 99.5]  delta 50.1 pts [44.7, 55.7]  McNemar p=4.64e-69 (n=765)
+  commit type (no prefix) acc  36.7% [35.4, 37.9] -> 52.1% [50.8, 53.4]  delta 15.5 pts [13.9, 16.9]  McNemar p=1.48e-90 (n=5508)
+  majority baseline: bugfix 52.3%
+
+wrote eval/results/comparison.json

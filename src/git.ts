@@ -1,29 +1,52 @@
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import Database from 'better-sqlite3';
 
-function classifyCommit(message: string, additions: number, deletions: number) {
-  const msg = message.toLowerCase();
-  const isRefactoring = /refactor|clean|simplif|restructur|reorgani/.test(msg) || deletions > additions * 0.6;
-  const isBugfix = /fix|bug|error|crash|broken|issue|patch/.test(msg);
-  const isTestFocused = /test|spec|coverage|assert/.test(msg);
+// Node's default 1 MB buffer silently truncated large histories to 0 commits
+const GIT_LOG_MAX_BUFFER = 1024 * 1024 * 1024;
 
-  let change_type = 'feature';
-  if (isTestFocused) change_type = 'test';
-  else if (isRefactoring) change_type = 'refactoring';
-  else if (isBugfix) change_type = 'bugfix';
-  else if (/doc|readme|comment|changelog/.test(msg)) change_type = 'docs';
+const CONVENTIONAL_TYPES: Record<string, string> = {
+  feat: 'feature', fix: 'bugfix', refactor: 'refactoring', test: 'test', tests: 'test', docs: 'docs',
+};
 
-  return { change_type, is_refactoring: isRefactoring ? 1 : 0, is_bugfix: isBugfix ? 1 : 0, is_test_focused: isTestFocused ? 1 : 0 };
+export function classifyCommit(message: string, additions: number, deletions: number) {
+  // Conventional Commits ("fix(scope): ...") state the type explicitly; other prefixes fall through to keywords
+  const conventional = message.match(/^(\w+)(\([^)]*\))?!?:\s*(.*)$/);
+  const declared = conventional ? CONVENTIONAL_TYPES[conventional[1].toLowerCase()] : undefined;
+  const msg = (conventional ? conventional[3] : message).toLowerCase();
+
+  // Bug fixes are often phrased as the symptom ("crash when X", "should not Y") rather than with the word "fix"
+  const isBugfix = /\bfix(e[sd]|ing)?\b|\bbugs?\b|\bcrash|\bbroken\b|\berrors?\b|\bissues?\b|\bpatch\b|\bregression\b|\bresolve[sd]?\b|\bhandle[sd]?\b|\bprevent|\bavoid|\bcorrect(ly)?\b|\bincorrect|\bwrong\b|\bmissing\b|\bfail|\binvalid\b|\bwhen\b|\bshould\b|\bnot\b|\bdon'?t\b/.test(msg);
+  const isTestFocused = /\btests?\b|\bspecs?\b|\bcoverage\b|\bassert/.test(msg);
+  const isDocs = /\bdocs?\b|\breadme\b|\bdocumentation\b|\bcomments?\b|\bchangelog\b|\btypos?\b|\bjsdoc\b|\bdocstrings?\b/.test(msg);
+  const isRefactoring = /\brefactor|\bclean|\bsimplif|\brestructur|\breorgani|\brename|\bmove\b/.test(msg);
+
+  // Keyword-only: a deletion-heavy diff said little about intent (most such commits were fixes or docs edits)
+  let change_type = declared;
+  if (!change_type) {
+    if (isTestFocused) change_type = 'test';
+    else if (isDocs) change_type = 'docs';
+    else if (isBugfix) change_type = 'bugfix';
+    else if (isRefactoring) change_type = 'refactoring';
+    else change_type = 'feature';
+  }
+
+  return {
+    change_type,
+    is_refactoring: change_type === 'refactoring' || isRefactoring ? 1 : 0,
+    is_bugfix: change_type === 'bugfix' || isBugfix ? 1 : 0,
+    is_test_focused: change_type === 'test' || isTestFocused ? 1 : 0,
+  };
 }
 
 export function parseGitHistory(repoPath: string, repoName: string, db: Database.Database) {
   let logOutput: string;
   try {
-    logOutput = execSync(
-      'git log --numstat --format="^^^%H|%ae|%an|%ai|%s"',
-      { cwd: repoPath, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] }
+    logOutput = execFileSync(
+      'git', ['log', '--numstat', '--format=^^^%H|%ae|%an|%ai|%s'],
+      { cwd: repoPath, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'], maxBuffer: GIT_LOG_MAX_BUFFER }
     );
-  } catch {
+  } catch (err: any) {
+    console.warn(`\n  warning: could not read git history for ${repoName}: ${err.code ?? err.message}`);
     return 0;
   }
 
